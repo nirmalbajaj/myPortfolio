@@ -35,7 +35,11 @@ export default {
           bg: '#ffffff',
           text: '#000000',
         }
-      }
+      },
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif'],
+        'space': ['Space Grotesk', 'sans-serif'],
+      },
     },
   },
   plugins: [],
