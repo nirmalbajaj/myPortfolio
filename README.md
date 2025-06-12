@@ -1,9 +1,10 @@
-# MyPortfolio
+# MyPortfolio Website
 
 A vibrant personal portfolio website showcasing my projects, skills, and expertise. Built with React, TailwindCSS, GSAP, and lucide-react, crafted with passion and creativity.
 
 ## Table of Contents
 - [Home](#home)
+- [Experience](#experience)
 - [Projects](#projects)
 - [Skills](#Skills)
 - [Contact](#Contact)
@@ -26,3 +27,4 @@ This portfolio website serves as a professional hub to display my projects, tech
 - **lucide-react**: Lightweight and customizable icon library.
 - **Vite**: Build tool for fast development and production builds.
 - **OGL**: Lightweight WebGL library for rendering 3D graphics.
+- **Framer-Motion**: Powerful motion library for creating fluid and interactive animations.
