@@ -34,12 +34,12 @@ const ThemeToggle = ({ isDark = false, onToggle = () => {} }) => {
       <div className="relative z-10 flex items-center justify-center">
         {isDark ? (
           <Moon 
-            size={20} 
+            size={15} 
             className="transform transition-all duration-300 group-hover:rotate-12" 
           />
         ) : (
           <Sun 
-            size={20} 
+            size={15} 
             className="transform transition-all duration-300 group-hover:rotate-180" 
           />
         )}

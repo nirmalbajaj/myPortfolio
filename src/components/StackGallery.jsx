@@ -343,7 +343,10 @@ class App {
       { image: 'mysql-icon.svg', text: 'MySQL' },
       { image: 'nodejs.svg', text: 'Node.js' },
       { image: 'tailwindcss-icon.svg', text: 'TailwindCSS' },
-      { image: '/public/github.jpeg', text: 'Github' }
+      { image: '/github.jpeg', text: 'Github' },
+      { image: '/Postman.png', text: 'Postman' },
+      { image: '/c++.png', text: 'C/C++' }
+
     ]
     const galleryItems = items && items.length ? items : defaultItems
     this.mediasImages = galleryItems.concat(galleryItems)
