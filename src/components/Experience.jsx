@@ -10,12 +10,11 @@ export default function PortfolioShowcase() {
           {/* Project Header */}
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <p className="text-purple-300 text-sm font-medium tracking-wider uppercase">
+              <p className="text-purple-300 text-base font-medium tracking-wider uppercase flex flex-col gap-1">
                 Bharti Soft Tech
+                <span className='text-gray-400 text-sm font-medium'>September 2024 - March 2025</span>
               </p>
-              <p className="text-gray-400 text-sm font-medium">
-                September 2024 - March 2025
-              </p>
+              <p></p>
             </div>
             <h1 className="text-3xl font-bold text-amber-300 leading-tight italic">
               Front End Developer Intern
@@ -51,11 +50,10 @@ export default function PortfolioShowcase() {
             {/* Project Header */}
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <p className="text-gray-400 text-sm font-medium">
-                  November 2023 - April 2024
-                </p>
-                <p className="text-purple-300 text-sm font-medium tracking-wider uppercase">
+                <p></p>
+                <p className="text-purple-300 text-base font-medium tracking-wider uppercase flex flex-col gap-1">
                   Indian Railways
+                  <span className='text-gray-400 text-sm font-medium'>November 2023 - April 2024</span>
                 </p>
               </div>
               <h1 className="text-3xl font-bold text-amber-300 leading-tight italic">
