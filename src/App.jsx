@@ -18,6 +18,7 @@ import Folder from './components/Folder';
 import Loader from './components/Loader';
 import SquishyCard from './components/SquishyCard';
 import ChromaGrid from './components/ChromeGrid'; // Import ChromaGrid
+import LikeButton from './components/LikeButton';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -122,7 +123,7 @@ export default function App() {
       image: "https://images.pexels.com/photos/6127060/pexels-photo-6127060.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       title: "Snake Game",
       subtitle: "Classic Snake Game",
-      handle: "Python",
+      handle: "Full Stack",
       borderColor: "#EF4444",
       gradient: "linear-gradient(195deg, #EF4444, #000)",
       url: "https://github.com/nirmalbajaj/Snake_Game_python"
@@ -140,7 +141,7 @@ export default function App() {
       image: "https://media.istockphoto.com/id/1426988809/photo/security-password-login-online-concept-hands-typing-and-entering-username-and-password-of.jpg?b=1&s=612x612&w=0&k=20&c=GRrxNacgwlGcYl_w9Rs9oetyZVFRsrIjL9CAhNHL11o=",
       title: "Animated Login",
       subtitle: "Interactive Login Page",
-      handle: "UI/UX",
+      handle: "Frontend",
       borderColor: "#06B6D4",
       gradient: "linear-gradient(135deg, #06B6D4, #000)",
       url: "https://github.com/nirmalbajaj/Animated_LoginPage"
@@ -386,6 +387,23 @@ export default function App() {
               />
             </div>
           </div>
+
+          {/* Footer Section */}
+          <footer className="relative bg-gradient-to-t from-gray-900 to-transparent dark:from-black dark:to-transparent py-12">
+            <div className="container mx-auto px-4">
+              <div className="flex flex-col items-center justify-center space-y-6">
+                <LikeButton />
+                <div className="text-center">
+                  <p className="text-amber-200 text-sm font-space">
+                    Designed & Built by Nirmal Bajaj
+                  </p>
+                  <p className="text-gray-400 text-xs mt-2 font-poppins">
+                    © {new Date().getFullYear()} All rights reserved
+                  </p>
+                </div>
+              </div>
+            </div>
+          </footer>
 
         </div>
       )}
