@@ -94,20 +94,29 @@ const GooeyNav = ({
   };
   const handleClick = (e, index) => {
     const liEl = e.currentTarget;
-    if (activeIndex === index) return;
+    if (activeIndex === index) {
+      if (items[index].onClick) {
+        items[index].onClick(e);
+      }
+      return;
+    }
     setActiveIndex(index);
     updateEffectPosition(liEl);
+    
     if (filterRef.current) {
       const particles = filterRef.current.querySelectorAll(".particle");
       particles.forEach((p) => filterRef.current.removeChild(p));
+      makeParticles(filterRef.current);
     }
+    
     if (textRef.current) {
       textRef.current.classList.remove("active");
       void textRef.current.offsetWidth;
       textRef.current.classList.add("active");
     }
-    if (filterRef.current) {
-      makeParticles(filterRef.current);
+
+    if (items[index].onClick) {
+      items[index].onClick(e);
     }
   };
   const handleKeyDown = (
@@ -302,17 +311,12 @@ const GooeyNav = ({
             {items.map((item, index) => (
               <li
                 key={index}
-                className={`py-[0.6em] px-[1em] rounded-full relative cursor-pointer transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${activeIndex === index ? "active" : ""
-                  }`}
+                className={`py-[0.6em] px-[1em] rounded-full relative cursor-pointer transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${
+                  activeIndex === index ? "active" : ""
+                }`}
                 onClick={(e) => handleClick(e, index)}
               >
-                <a
-                  href={item.href}
-                  onKeyDown={(e) => handleKeyDown(e, index)}
-                  className="outline-none"
-                >
-                  {item.label}
-                </a>
+                <span className="outline-none">{item.label}</span>
               </li>
             ))}
           </ul>

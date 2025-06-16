@@ -74,11 +74,58 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+  // Update scroll tracking logic
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('div[id]');
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          const index = navigationItems.findIndex(item => item.href === `#${sectionId}`);
+          if (index !== -1) {
+            const navItemEl = document.querySelector(`[href="#${sectionId}"]`);
+            if (navItemEl) {
+              const liEl = navItemEl.closest('li');
+              if (liEl) {
+                const event = { currentTarget: liEl };
+                handleClick(event, index);
+              }
+            }
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Update handleNavClick to be more reliable
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      const navHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const navigationItems = [
-    { label: "Home", href: "#home" },
-    { label: "Skills", href: "#skill" },
-    { label: "Experience", href: "#experience" },
-    { label: "Contact", href: "#contact" }
+    { label: "Home", href: "#home", onClick: (e) => handleNavClick(e, '#home') },
+    { label: "Skills", href: "#skill", onClick: (e) => handleNavClick(e, '#skill') },
+    { label: "Experience", href: "#experience", onClick: (e) => handleNavClick(e, '#experience') },
+    { label: "Projects", href: "#projects", onClick: (e) => handleNavClick(e, '#projects') }
   ];
 
   const rotatingTitles = [
@@ -184,7 +231,8 @@ export default function App() {
               <img
                 src={logo}
                 alt="Portfolio Logo"
-                className="h-28 w-auto object-contain"
+                className="h-28 w-auto object-contain cursor-pointer"
+                onClick={() => window.location.reload()}
               />
             </div>
             <div className="absolute left-1/2 transform -translate-x-1/2 lg:text-sm">
@@ -230,7 +278,7 @@ export default function App() {
           </div>
 
           {/* Hero Section */}
-          <div className="relative z-10 container mx-auto pt-24">
+          <div id="home" className="relative z-10 container mx-auto pt-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-[calc(100vh-6rem)] ">
               {/* Left side - Introduction */}
               <div className="flex flex-col justify-center space-y-10 max-w-4xl">
@@ -294,7 +342,7 @@ export default function App() {
           </div>
 
           {/* Tech Stack Section */}
-          <div className="relative min-h-screen bg-white dark:bg-gray-900 py-20">
+          <div id="skill" className="relative min-h-screen bg-white dark:bg-gray-900 py-20">
             <div className="container mx-auto px-4">
               <div className="flex justify-center mb-16">
                 <BlurText
@@ -317,7 +365,7 @@ export default function App() {
           </div>
 
           {/* Experience Section */}
-          <div className="relative min-h-screen bg-gradient-to-br from-amber-500/20 to-amber-700/20 dark:from-amber-900/30 dark:to-amber-800/30 py-20">
+          <div id="experience" className="relative min-h-screen bg-gradient-to-br from-amber-500/20 to-amber-700/20 dark:from-amber-900/30 dark:to-amber-800/30 py-20">
             <div className="container mx-auto px-4">
               <div className="flex justify-center mb-16">
                 <BlurText
@@ -364,7 +412,7 @@ export default function App() {
           </div>
 
           {/* Projects Section */}
-          <div className="relative min-h-screen bg-gradient-to-br from-amber-500/20 to-amber-700/20 dark:from-amber-900/30 dark:to-amber-800/30 py-12">
+          <div id="projects" className="relative min-h-screen bg-gradient-to-br from-amber-500/20 to-amber-700/20 dark:from-amber-900/30 dark:to-amber-800/30 py-12">
             <div className="container mx-auto px-2">
               <div className="flex justify-center mb-10">
                 <BlurText
