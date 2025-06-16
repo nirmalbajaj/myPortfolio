@@ -7,10 +7,12 @@ A vibrant personal portfolio website showcasing my projects, skills, and experti
 - [Experience](#experience)
 - [Projects](#projects)
 - [Skills](#Skills)
-- [Contact](#Contact)
   
 ## About
 This portfolio website serves as a professional hub to display my projects, technical skills, and experience. It features smooth animations, a responsive design, and a modern aesthetic to create an engaging user experience.
+
+## Live Demo
+Explore the live application(Still Working On): [Live Demo](https://nirmalwebsite.netlify.app)
 
 ## Features
 - **Project Showcase**: Highlighting key projects with descriptions and live demos.
