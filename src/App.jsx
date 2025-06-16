@@ -10,7 +10,6 @@ import FaLinkedin from './assets/InBug-White.png'
 import logo from './assets/NB-removebg-preview.png';
 import photo from './assets/photo.png'
 import RotatingText from './components/RotatingText';
-import resume from './assets/resume.pdf'; // Add your resume import
 import StackGallery from './components/StackGallery';
 import Experience from './components/Experience'; // Import Experience 
 import BlurText from './components/BlurText';
@@ -160,7 +159,7 @@ export default function App() {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = resume;
+    link.href = '../public/Resume.pdf';
     link.download = 'Nirmal_Bajaj_Resume.pdf';
     document.body.appendChild(link);
     link.click();
