@@ -18,9 +18,11 @@ import Loader from './components/Loader';
 import SquishyCard from './components/SquishyCard';
 import ChromaGrid from './components/ChromeGrid'; // Import ChromaGrid
 import LikeButton from './components/LikeButton';
+import Popup from './components/Popup';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Add loading effect
   useEffect(() => {
@@ -198,10 +200,7 @@ export default function App() {
   const toggleTheme = () => setIsDarkMode(prev => !prev);
   
   const handleContactClick = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    window.location.href = 'mailto:nirmalbajaj99@gmail.com';
   };
 
   const handleDownloadResume = () => {
@@ -223,6 +222,7 @@ export default function App() {
         <Loader />
       ) : (
         <div className="min-h-screen w-full relative overflow-hidden">
+          <Popup />
           <Background />
           
           {/* Navbar */}
@@ -235,7 +235,9 @@ export default function App() {
                 onClick={() => window.location.reload()}
               />
             </div>
-            <div className="absolute left-1/2 transform -translate-x-1/2 lg:text-sm">
+            
+            {/* Desktop Navigation - Only show on large screens (1024px+) */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 lg:text-sm hidden lg:block">
               <GooeyNav
                 items={navigationItems}
                 particleCount={15}
@@ -247,25 +249,31 @@ export default function App() {
                 colors={[1, 2, 3, 1, 2, 3, 1, 4]}
               />
             </div>
+
+            {/* Mobile/Tablet Navigation */}
             <div className="flex-shrink-0 flex items-center gap-4">
-              <StarBorder
-                as="a"
-                href="https://github.com/nirmalbajaj"
-                target="_blank"
-                rel="noopener noreferrer"
-                speed="5s"
-              >
-                <img src={FaGithub} alt="GitHub" className="w-5 h-5" />
-              </StarBorder>
-              <StarBorder
-                as="a"
-                href="https://www.linkedin.com/in/nirmal-bajaj/"
-                target="_blank"
-                rel="noopener noreferrer"
-                speed="5s"
-              >
-                <img src={FaLinkedin} alt="LinkedIn" className="w-5 h-5" />
-              </StarBorder>
+              {/* Desktop Social Links - Only show on large screens */}
+              <div className="hidden lg:flex items-center gap-4">
+                <StarBorder
+                  as="a"
+                  href="https://github.com/nirmalbajaj"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  speed="5s"
+                >
+                  <img src={FaGithub} alt="GitHub" className="w-5 h-5" />
+                </StarBorder>
+                <StarBorder
+                  as="a"
+                  href="https://www.linkedin.com/in/nirmal-bajaj/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  speed="5s"
+                >
+                  <img src={FaLinkedin} alt="LinkedIn" className="w-5 h-5" />
+                </StarBorder>
+              </div>
+              
               <ThemeToggle isDark={isDarkMode} onToggle={toggleTheme} />
               <ShinyText
                 isDark={isDarkMode}
@@ -274,7 +282,64 @@ export default function App() {
                 speed={3}
                 className='custom-class text-sm'
               />
+              
+              {/* Mobile/Tablet Hamburger Menu - Show for all screens below lg (1024px) */}
+              <button
+                className="lg:hidden p-2 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                <div className="w-5 h-5 flex flex-col justify-center items-center">
+                  <div className={`w-4 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-0.5' : ''}`}></div>
+                  <div className={`w-4 h-0.5 bg-white transition-all duration-300 mt-1 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></div>
+                  <div className={`w-4 h-0.5 bg-white transition-all duration-300 mt-1 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
+                </div>
+              </button>
             </div>
+
+            {/* Mobile/Tablet Menu Overlay */}
+            {isMobileMenuOpen && (
+              <div className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40" onClick={() => setIsMobileMenuOpen(false)}>
+                <div className="absolute right-0 top-0 h-full w-80 bg-gray-900/95 backdrop-blur-md border-l border-white/10 p-6 pt-32">
+                  <nav className="flex flex-col space-y-6">
+                    {navigationItems.map((item, index) => (
+                      <a
+                        key={index}
+                        href={item.href}
+                        className="text-white text-lg font-medium hover:text-amber-200 transition-colors"
+                        onClick={(e) => {
+                          item.onClick(e);
+                          setIsMobileMenuOpen(false);
+                        }}
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                    <div className="pt-6 border-t border-white/10">
+                      <div className="flex gap-4">
+                        <StarBorder
+                          as="a"
+                          href="https://github.com/nirmalbajaj"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          speed="5s"
+                        >
+                          <img src={FaGithub} alt="GitHub" className="w-5 h-5" />
+                        </StarBorder>
+                        <StarBorder
+                          as="a"
+                          href="https://www.linkedin.com/in/nirmal-bajaj/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          speed="5s"
+                        >
+                          <img src={FaLinkedin} alt="LinkedIn" className="w-5 h-5" />
+                        </StarBorder>
+                      </div>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Hero Section */}
