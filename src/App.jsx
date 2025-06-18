@@ -23,6 +23,7 @@ import Popup from './components/Popup';
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Add loading effect
   useEffect(() => {
@@ -30,6 +31,16 @@ export default function App() {
       setIsLoading(false);
     }, 2500);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Scroll detection for navbar styling
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Time state
@@ -226,7 +237,11 @@ export default function App() {
           <Background />
           
           {/* Navbar */}
-          <div className="fixed left-0 w-full z-50 flex items-center justify-between px-8">
+          <div className={`fixed left-0 w-full z-50 flex items-center justify-between px-8 transition-all duration-300 ${
+            isScrolled 
+              ? 'bg-black/20 backdrop-blur-lg border-b border-white/10' 
+              : ''
+          }`}>
             <div className="flex-shrink-0">
               <img
                 src={logo}
@@ -390,7 +405,7 @@ export default function App() {
                 </div>
               </div>
               {/* Right side - Profile Card */}
-              <div className="flex justify-center lg:justify-end lg:-translate-x-3">
+              <div className="flex justify-center lg:justify-end lg:-translate-x-3 sm:-translate-y-2">
                 <ProfileCard
                   name="Nirmal Bajaj"
                   title="Software Developer"
